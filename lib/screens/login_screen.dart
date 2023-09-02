@@ -11,31 +11,31 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        //Login Icon
-        const SizedBox(height: 50,),
-        Icon(Icons.adjust,size: 30,color: Colors.amber[400],),
-
-        // Welcome back 
-        const Text('Welcome Back Fam!'),
-
-        //Textfield for email
-        const TextField(
-          obscureText: false,
-          decoration: InputDecoration(
-            hintText: "Email"
-          ),
-        )
-
-        //Textfield for password
-
-
-        // Log In button
-
-        // Don't have an account? Sign Up
-      ],
+    return  Scaffold(body: SafeArea(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          //Login Icon
+          const SizedBox(height: 20,),
+          Icon(Icons.adjust,size: 30,color: Colors.amber[400],),
+          const SizedBox(height: 50,),
+    
+          // Welcome back 
+          const Text('Welcome Back Fam!'),
+          const SizedBox(height: 60,),
+    
+          //Textfield for email
+          
+    
+          //Textfield for password
+    
+    
+          // Log In button
+    
+          // Don't have an account? Sign Up
+        ],
+      ),
     ));
   }
 }
