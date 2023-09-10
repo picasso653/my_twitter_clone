@@ -17,12 +17,15 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Twitter Clone',
         theme: ThemeData(
-            primaryColor: const Color(0xFFFE029A),
+            colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFFE029A)),
+            buttonTheme: const ButtonThemeData(
+           buttonColor: Color.fromARGB(255, 137, 255, 82),
+           shape: RoundedRectangleBorder()),
             textTheme: const TextTheme(
-              bodyLarge: TextStyle(color: Color(0xFFE0E0E0)),
+              bodyLarge: TextStyle(color: Colors.blueAccent),
             ),
-            colorScheme: ColorScheme.fromSwatch()
-                .copyWith(secondary: const Color(0xFF79F6CB))),
+            
+            ),
         home: LoginScreen());
   }
 }

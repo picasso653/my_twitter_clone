@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_twitter_clone/Widgets/MyTextField.dart';
 import 'package:my_twitter_clone/Widgets/my_button.dart';
@@ -6,8 +7,24 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  
+  BuildContext? get context => null;
+  
   // for the Login
-  void logIn() {}
+  void logIn() async {
+    try {
+      final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: usernameController.text,
+        password: passwordController.text,
+      );
+      // ignore: unnecessary_null_comparison
+      if (user != null) {
+        Navigator.pushNamed(context!, '/home');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +48,13 @@ class LoginScreen extends StatelessWidget {
           ),
 
           // Welcome back
-          const Text(
+           Text(
             'Welcome Back Fam!',
             style: TextStyle(
                 fontSize: 20,
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.bold,
-                color:  Color.fromARGB(255, 236, 188, 45),),
+                color:  Theme.of(context).colorScheme.secondary,),
           ),
           const SizedBox(
             height: 60,
@@ -69,9 +86,19 @@ class LoginScreen extends StatelessWidget {
             height: 20,
           ),
           // Log In button
-          MyButton(onTap: logIn)
+          MyButton(onTap: logIn),
+          const SizedBox(height: 15,),
 
           // Don't have an account? Sign Up
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Don\'t have an account? Sign Up'),
+              ],
+            ),
+          ),
         ],
       ),
     ));
