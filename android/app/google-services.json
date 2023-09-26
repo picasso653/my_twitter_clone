@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "647173005180-738c2e4cp9g5v987h637dnl2e92398l4.apps.googleusercontent.com",
+          "client_id": "647173005180-f8uhp9hl9v08imlgi5uleq9gsj019rjf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +29,13 @@
             {
               "client_id": "647173005180-738c2e4cp9g5v987h637dnl2e92398l4.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "647173005180-9ajfjae3p9u32pfjb0r6k1q9qatkevs9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myTwitterClone.RunnerTests"
+              }
             }
           ]
         }
