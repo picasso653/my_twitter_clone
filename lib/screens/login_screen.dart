@@ -64,7 +64,8 @@ class LoginScreen extends StatelessWidget {
                 MyTextField(
                   controller: usernameController,
                   hintText: 'Type in your email',
-                  obscureText: false,
+                  
+                  showHiddEye: false,
                 ),
                 const SizedBox(
                   height: 10,
@@ -73,7 +74,8 @@ class LoginScreen extends StatelessWidget {
                 MyTextField(
                   controller: passwordController,
                   hintText: 'Password',
-                  obscureText: true,
+                  
+                  showHiddEye: true,
                 ),
                 const SizedBox(
                   height: 10,
@@ -94,42 +96,42 @@ class LoginScreen extends StatelessWidget {
                 ),
                 // "Forgot password?" Text
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Forgot password?',
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey, // Changed text color
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    ],
-                  ),
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Forgot password?',
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey, // Changed text color
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
                 // Login with google
                 Row(
-                      children: [
-                        Expanded(
-                            child: Divider(
-                          thickness: 0.5,
-                          color: Colors.purpleAccent,
-                        )),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Text(
-                            'Log in with',
-                            style: TextStyle(color: Colors.greenAccent),
-                          ),
-                        ),
-                        Expanded(
-                            child: Divider(
-                          thickness: 0.5,
-                          color: Colors.purpleAccent,
-                        ))
-                      ],
+                  children: [
+                    Expanded(
+                        child: Divider(
+                      thickness: 0.5,
+                      color: Colors.purpleAccent,
+                    )),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        'Log in with',
+                        style: TextStyle(color: Colors.greenAccent),
+                      ),
                     ),
+                    Expanded(
+                        child: Divider(
+                      thickness: 0.5,
+                      color: Colors.purpleAccent,
+                    ))
+                  ],
+                ),
                 const SizedBox(
                   height: 15,
                 ),

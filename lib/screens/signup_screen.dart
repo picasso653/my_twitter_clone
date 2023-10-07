@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../Widgets/square_tile.dart';
@@ -8,10 +9,17 @@ class SignUpScreen extends StatelessWidget {
   // Text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
-  get children => null;
-  // Sign User Up method
-  void SignUserUp() {}
+  void SignUserUp() async {
+    if (passwordConfirmed()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: usernameController.text, password: passwordController.text);
+    } 
+  }
+
+  bool passwordConfirmed() =>
+      passwordController.text == confirmPasswordController.text;
 
   @override
   Widget build(BuildContext context) {
@@ -48,37 +56,26 @@ class SignUpScreen extends StatelessWidget {
               // Username text field
               //Email box
               MyTextField(
-                controller: usernameController,
-                hintText: 'Type in your email',
-                obscureText: false,
-              ),
+                  controller: usernameController,
+                  hintText: 'Type in your email',
+                  showHiddEye: false),
               const SizedBox(
                 height: 10,
               ),
-              // Username
-              MyTextField(
-                controller: usernameController,
-                hintText: 'Username',
-                obscureText: false,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+
               // password box
               MyTextField(
-                controller: passwordController,
-                hintText: 'Password',
-                obscureText: true,
-              ),
+                  controller: passwordController,
+                  hintText: 'Password',
+                  showHiddEye: true),
               const SizedBox(
                 height: 10,
               ),
               // Retype password box
               MyTextField(
-                controller: passwordController,
-                hintText: 'Type the password again',
-                obscureText: true,
-              ),
+                  controller: confirmPasswordController,
+                  hintText: 'Confirm password',
+                  showHiddEye: true),
               const SizedBox(
                 height: 10,
               ),
@@ -88,39 +85,40 @@ class SignUpScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.green, // Change text color
-                  minimumSize: Size(double.infinity, 50), // Change button height
+                  minimumSize:
+                      Size(double.infinity, 50), // Change button height
                 ),
                 child: Text(
                   'Sign Up',
                   style: TextStyle(fontSize: 18), // Change text size
                 ),
               ),
-        
+
               // Sign Up using other methods
               const SizedBox(
                 height: 10,
               ),
               Row(
-                    children: [
-                      Expanded(
-                          child: Divider(
-                        thickness: 0.5,
-                        color: Colors.purpleAccent,
-                      )),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(
-                          'Sign up with',
-                          style: TextStyle(color: Colors.greenAccent),
-                        ),
-                      ),
-                      Expanded(
-                          child: Divider(
-                        thickness: 0.5,
-                        color: Colors.purpleAccent,
-                      ))
-                    ],
+                children: [
+                  Expanded(
+                      child: Divider(
+                    thickness: 0.5,
+                    color: Colors.purpleAccent,
+                  )),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      'Sign up with',
+                      style: TextStyle(color: Colors.greenAccent),
+                    ),
                   ),
+                  Expanded(
+                      child: Divider(
+                    thickness: 0.5,
+                    color: Colors.purpleAccent,
+                  ))
+                ],
+              ),
               const SizedBox(
                 height: 15,
               ),
