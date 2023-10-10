@@ -14,8 +14,10 @@ class SignUpScreen extends StatelessWidget {
   void SignUserUp() async {
     if (passwordConfirmed()) {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: usernameController.text, password: passwordController.text);
-    } 
+        email: usernameController.text,
+        password: passwordController.text,
+      );
+    }
   }
 
   bool passwordConfirmed() =>

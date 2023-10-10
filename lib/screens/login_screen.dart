@@ -13,7 +13,9 @@ class LoginScreen extends StatelessWidget {
   //Log User In method
   void logUserIn() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: usernameController.text, password: passwordController.text);
+        email: usernameController.text,
+         password: passwordController.text,
+         );
   }
 
   @override
@@ -64,7 +66,6 @@ class LoginScreen extends StatelessWidget {
                 MyTextField(
                   controller: usernameController,
                   hintText: 'Type in your email',
-                  
                   showHiddEye: false,
                 ),
                 const SizedBox(
@@ -74,7 +75,6 @@ class LoginScreen extends StatelessWidget {
                 MyTextField(
                   controller: passwordController,
                   hintText: 'Password',
-                  
                   showHiddEye: true,
                 ),
                 const SizedBox(

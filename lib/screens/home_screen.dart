@@ -1,12 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_twitter_clone/screens/Drawer.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void signUserOut() {
-    FirebaseAuth.instance.signOut();
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -14,54 +14,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
       ),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.blue,
-          child: ListView(
-            children: [
-              DrawerHeader(
-                child: Image.asset(
-                  'assets/images/icon-480.png',
-                  height: 50,
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.person_outline),
-                title: Text(
-                  'Profile',
-                  style: TextStyle(
-                    fontSize: 18, // Increased font size
-                    color: Colors.white, // Changed text color
-                  ),
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: Icon(Icons.list_alt_outlined),
-                title: Text(
-                  'List',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: Icon(Icons.logout),
-                title: Text(
-                  'Logout',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
-                ),
-                onTap: signUserOut,
-              ),
-            ],
-          ),
-        ),
-      ),
+      drawer: MyDrawer(),
       body: Center(
         child: Text(
           "LOGGED IN!",
@@ -72,6 +25,35 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar:  GNav(
+                tabs: [
+                  GButton(
+                    icon: LineIcons.home,
+                    text: 'Home',
+                  ),
+                  GButton(
+                    icon: LineIcons.search,
+                    text: 'Search',
+                  ),
+                  GButton(
+                    icon: LineIcons.bell,
+                    text: 'Notifications',
+                  ),
+                  GButton(
+                    icon: LineIcons.envelope,
+                    text: 'Messages',
+                  ),
+                ],
+                selectedIndex: 0,
+                onTabChange: (index) {},
+                rippleColor: Colors.grey,
+                hoverColor: Colors.grey,
+                gap: 5,
+                activeColor: Colors.pink,
+                iconSize: 20,
+                textStyle: TextStyle(fontSize: 12, color: Colors.black),
+              ),
+          
     );
   }
 }
