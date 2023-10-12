@@ -4,24 +4,58 @@ import 'package:flutter/material.dart';
 import '../Widgets/square_tile.dart';
 import '../Widgets/textfield_widget.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   // Text editing controllers
   final usernameController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   final confirmPasswordController = TextEditingController();
 
   void SignUserUp() async {
-    if (passwordConfirmed()) {
+
+    showDialog(
+      context: context,
+      builder: (context) => Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
+
+
+   
+      if (passwordController.text == confirmPasswordController.text) {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: usernameController.text,
         password: passwordController.text,
       );
+      Navigator.pop(context);
+    } else {
+      showErrorMessage("Passwords don\'t match");
+      Navigator.pop(context);
+
     }
+    
   }
 
-  bool passwordConfirmed() =>
-      passwordController.text == confirmPasswordController.text;
+  void showErrorMessage(String message) {
+    showDialog(
+      context: context,
+      builder: ((context) {
+        return AlertDialog(
+          title: Text(message),
+        );
+      }),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

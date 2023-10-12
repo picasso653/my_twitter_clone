@@ -4,19 +4,66 @@ import 'package:flutter/material.dart';
 import '../Widgets/square_tile.dart';
 import '../Widgets/textfield_widget.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   // Text editing controllers
   final usernameController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   //Log User In method
   void logUserIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: usernameController.text,
-         password: passwordController.text,
-         );
+    // Show loading circle
+    showDialog(
+      context: context,
+      builder: (context) => Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
+// Main lgoin function
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: usernameController.text,
+      password: passwordController.text,
+    );
+    // Pop Goes the weasel... or  however they spell it
+    Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      if (e.code == 'user-not-found'){
+        return wrongEmailMessage();
+      } else if (e.code == 'wrong-password'){
+        return wrongPasswordMessage();
+      }
+    }
+
   }
+
+
+void wrongEmailMessage(){
+   showDialog(context: context, builder: (context){
+    return AlertDialog(
+      title: Text('Wrong Email'),
+    );
+  });
+}
+
+void wrongPasswordMessage(){
+  showDialog(context: context, builder: (context){
+    return AlertDialog(
+      title: Text('Wrong Password'),
+    );
+  });
+}
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_twitter_clone/screens/Drawer.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+   HomeScreen({super.key});
 
-  
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
       drawer: MyDrawer(),
       body: Center(
         child: Text(
-          "LOGGED IN!",
+          "LOGGED IN AS : " + user.email!,
           style: TextStyle(
             fontSize: 24, 
             color: Colors.black, 
