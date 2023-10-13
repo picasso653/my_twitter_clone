@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_twitter_clone/screens/login_screen.dart';
-import 'home_screen.dart';
+import 'navigation_screen.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -15,7 +15,7 @@ class AuthScreen extends StatelessWidget {
           print(snapshot.data);
           // Is user logged in
           if (snapshot.hasData) {
-            return  HomeScreen();
+            return  BottomNavBar();
           }
           else {
             return  LoginScreen();

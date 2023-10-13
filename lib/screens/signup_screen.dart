@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../Widgets/square_tile.dart';
 import '../Widgets/textfield_widget.dart';
+import '../services/auth_services.dart';
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
@@ -20,7 +21,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final confirmPasswordController = TextEditingController();
 
   void SignUserUp() async {
-
     showDialog(
       context: context,
       builder: (context) => Container(
@@ -30,20 +30,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
 
-
-   
-      if (passwordController.text == confirmPasswordController.text) {
+    if (passwordController.text == confirmPasswordController.text) {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: usernameController.text,
         password: passwordController.text,
       );
       Navigator.pop(context);
+    
     } else {
       showErrorMessage("Passwords don\'t match");
       Navigator.pop(context);
-
     }
-    
   }
 
   void showErrorMessage(String message) {
@@ -161,11 +158,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SquareTile(imagepath: 'assets/images/google_logo.png'),
-                  const SizedBox(
-                    width: 25,
+                  SquareTile(
+                    imagepath: 'assets/images/google_logo.png',
+                    onTap: () {
+                      AuthService().signInWithGoogle();
+                    },
                   ),
-                  SquareTile(imagepath: 'assets/images/google_logo.png')
+                  const SizedBox(
+                    width: 50,
+                  ),
+                  SquareTile(
+                    imagepath: 'assets/images/google_logo.png',
+                    onTap: () {
+                      AuthService().signInWithGoogle();
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 10),

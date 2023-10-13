@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_twitter_clone/services/auth_services.dart';
 
 import '../Widgets/square_tile.dart';
 import '../Widgets/textfield_widget.dart';
@@ -185,11 +186,19 @@ void wrongPasswordMessage(){
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SquareTile(imagepath: 'assets/images/google_logo.png'),
-                    const SizedBox(
-                      width: 25,
-                    ),
-                    SquareTile(imagepath: 'assets/images/google_logo.png')
+                    SquareTile(
+                    imagepath: 'assets/images/google_logo.png',
+                    onTap: () {
+                       AuthService().signInWithGoogle();
+                    },
+                  ),
+                  const SizedBox(width: 50,),
+                    SquareTile(
+                    imagepath: 'assets/images/google_logo.png',
+                    onTap: () {
+                      AuthService().signInWithGoogle();
+                    },
+                  ),
                   ],
                 ),
                 const SizedBox(
