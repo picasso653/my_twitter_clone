@@ -1,11 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_twitter_clone/screens/Drawer.dart';
+import 'package:my_twitter_clone/screens/home/Drawer.dart';
 
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
    HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final user = FirebaseAuth.instance.currentUser!;
 
   @override
