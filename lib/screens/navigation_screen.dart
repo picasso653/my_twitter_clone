@@ -4,6 +4,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:my_twitter_clone/screens/home/home_screen.dart';
 import 'package:my_twitter_clone/screens/notification_screen.dart';
 import 'package:my_twitter_clone/screens/search_screen.dart';
+import 'package:my_twitter_clone/screens/home/Drawer.dart';
 
 import 'message/messages_screen.dart';
 
@@ -21,6 +22,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDrawer(),
       body: PageView(
         controller: _pageController,
         children: [
@@ -73,5 +75,3 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
 }
 
-class NotificationsScreen {
-}

@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_twitter_clone/screens/home/Drawer.dart';
+import 'Create tweet/tweet_composer.dart';
+
 
 
 class HomeScreen extends StatefulWidget {
@@ -13,63 +15,55 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final user = FirebaseAuth.instance.currentUser!;
 
+  void _openTweetComposer(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TweetComposer()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
       ),
-      drawer: MyDrawer(),
-      body: ListView.builder(
-        itemCount: 10, // Example: Displaying 10 tweets
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Container(
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'User Name',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Tweet Content...',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
+
+      body: StreamBuilder<QuerySnapshot>(
+  stream: FirebaseFirestore.instance.collection('tweets').snapshots(),
+  builder: (context, snapshot) {
+    if (!snapshot.hasData) {
+      return CircularProgressIndicator(); // Loading indicator
+    }
+    final tweets = snapshot.data!.docs;
+    return ListView.builder(
+      itemCount: tweets.length,
+      itemBuilder: (context, index) {
+        var tweetContent = tweets[index].get('content');
+        var imageUrl = tweets[index].get('image_url');
+
+        return ListTile(
+          title: Column(
+        children: [
+          Text(tweetContent),
+          if (imageUrl != null)
+            Image.network(imageUrl),
+        ],
+      ) // Add other UI elements for tweets as needed
+        );
+      },
+    );
+  },
+)
+,
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add tweet functionality
+          _openTweetComposer(context);
         },
         backgroundColor: Colors.pinkAccent,
         child: Icon(Icons.edit),
       ),
-          
     );
   }
 }

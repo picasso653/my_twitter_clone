@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_twitter_clone/services/auth_services.dart';
+import 'package:my_twitter_clone/services/auth%20services/auth_services.dart';
 
 import '../Widgets/square_tile.dart';
 import '../Widgets/textfield_widget.dart';
@@ -204,7 +204,7 @@ void wrongPasswordMessage(){
                 const SizedBox(
                   height: 20,
                 ),
-                // "Don't have an account? Login" Text
+                // "Don't have an account? SignUp" Text
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
