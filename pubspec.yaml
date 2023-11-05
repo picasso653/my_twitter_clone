@@ -45,6 +45,7 @@ dependencies:
   translator: ^0.1.7
   cloud_firestore: ^4.9.3
   image_cropper: ^4.0.1
+  smooth_page_indicator: ^1.1.0
   # link_preview_generator: ^1.2.0
 
 dev_dependencies:
@@ -81,6 +82,7 @@ flutter:
     - assets/images/bulb.png
     - assets/images/google_logo.png
     - assets/images/error_image.png
+    - assets/images/welcome.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

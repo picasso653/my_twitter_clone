@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../Widgets/square_tile.dart';
-import '../Widgets/textfield_widget.dart';
-import '../services/auth services/auth_services.dart';
+import 'package:my_twitter_clone/screens/signup/onboarding/onboarding_screen.dart';
+import '../../Widgets/square_tile.dart';
+import '../../Widgets/textfield_widget.dart';
+import '../../services/auth services/auth_services.dart';
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
@@ -41,6 +41,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       showErrorMessage("Passwords don\'t match");
       Navigator.pop(context);
     }
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MainOnboardingScreen()),
+    );
   }
 
   void showErrorMessage(String message) {

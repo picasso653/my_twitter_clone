@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_twitter_clone/services/auth%20services/auth_services.dart';
 
-import '../Widgets/square_tile.dart';
-import '../Widgets/textfield_widget.dart';
+import '../../Widgets/square_tile.dart';
+import '../../Widgets/textfield_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});

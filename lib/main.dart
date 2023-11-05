@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_twitter_clone/screens/auth_screen.dart';
 import 'package:my_twitter_clone/screens/home/home_screen.dart';
-import 'package:my_twitter_clone/screens/login_screen.dart';
-import 'package:my_twitter_clone/screens/signup_screen.dart';
+import 'package:my_twitter_clone/screens/login/login_screen.dart';
+import 'package:my_twitter_clone/screens/signup/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
