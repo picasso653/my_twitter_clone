@@ -1,8 +1,11 @@
+// ignore_for_file: unused_import
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_twitter_clone/screens/auth_screen.dart';
 import 'package:my_twitter_clone/screens/home/home_screen.dart';
 import 'package:my_twitter_clone/screens/login/login_screen.dart';
+import 'package:my_twitter_clone/screens/signup/onboarding/onboarding_screen.dart';
 import 'package:my_twitter_clone/screens/signup/signup_screen.dart';
 
 void main() async {
@@ -19,7 +22,7 @@ class MyApp extends StatelessWidget {
     
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthScreen(),
+      home: MainOnboardingScreen(),
       routes:{
         'signupScreen': (context) => SignUpScreen(),
         'loginScreen': (context) => LoginScreen(),
