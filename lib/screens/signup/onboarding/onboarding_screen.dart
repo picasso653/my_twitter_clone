@@ -5,6 +5,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'last_onboarding_screen.dart';
 
 class MainOnboardingScreen extends StatefulWidget {
+
+
+  const MainOnboardingScreen({super.key, });
   @override
   State<MainOnboardingScreen> createState() => _MainOnboardingScreenState();
 }
@@ -13,6 +16,12 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
   PageController _pageController = PageController();
 
   bool onLastPageIndicator = false;
+
+  void goToLastPage() {
+    _pageController.jumpToPage(2);
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +36,7 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
           },
           children: [
             WelcomeScreen(),
-            UsernameProfileScreen(),
+            UsernameProfileScreen(goToLastPage: goToLastPage,),
             LastOnboardingScreen(),
           ],
         ),

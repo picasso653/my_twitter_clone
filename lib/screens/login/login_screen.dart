@@ -14,7 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   // Text editing controllers
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
 // Main lgoin function
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: usernameController.text,
+      email: emailController.text,
       password: passwordController.text,
     );
     // Pop Goes the weasel... or  however they spell it
@@ -112,7 +112,7 @@ void wrongPasswordMessage(){
                 ),
                 //Username/email box
                 MyTextField(
-                  controller: usernameController,
+                  controller: emailController,
                   hintText: 'Type in your email',
                   showHiddEye: false,
                 ),

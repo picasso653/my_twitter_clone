@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_twitter_clone/screens/signup/onboarding/onboarding_screen.dart';
 import '../../Widgets/square_tile.dart';
 import '../../Widgets/textfield_widget.dart';
 import '../../services/auth services/auth_services.dart';
+import 'package:my_twitter_clone/screens/userprofile/user_class.dart' as model;
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
@@ -14,7 +16,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   // Text editing controllers
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
@@ -29,22 +31,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
-
+    
     if (passwordController.text == confirmPasswordController.text) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: usernameController.text,
+      UserCredential cred =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
         password: passwordController.text,
       );
-      Navigator.pop(context);
-    
+      model.User user = model.User(
+          uid: cred.user!.uid,
+          email: emailController.text,
+          username: '',
+          firstName: '',
+          lastName: '',
+          dateOfBirth: '',
+          phoneNumber: '',
+          profilePictureUrl: '');
+      FirebaseFirestore.instance
+          .collection('Users')
+          .doc(cred.user!.uid)
+          .set(user.toJson());
+      Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => MainOnboardingScreen(
+                
+              )),
+    );
     } else {
       showErrorMessage("Passwords don\'t match");
       Navigator.pop(context);
     }
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => MainOnboardingScreen()),
-    );
+    
   }
 
   void showErrorMessage(String message) {
@@ -93,7 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // Username text field
               //Email box
               MyTextField(
-                  controller: usernameController,
+                  controller: emailController,
                   hintText: 'Type in your email',
                   showHiddEye: false),
               const SizedBox(
