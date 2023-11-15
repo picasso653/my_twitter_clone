@@ -10,7 +10,7 @@ class WelcomeScreen extends StatelessWidget {
       body: Column(
         children: [
           Image.asset(
-            'assets/images/welcome.png',
+            'assets/images/welcome_image-3.jpeg',
             fit: BoxFit.cover,
             height: 350,
             width: MediaQuery.of(context).size.width,

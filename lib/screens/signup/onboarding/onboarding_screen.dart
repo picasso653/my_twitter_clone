@@ -36,8 +36,8 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
           },
           children: [
             WelcomeScreen(),
-            UsernameProfileScreen(goToLastPage: goToLastPage,),
-            LastOnboardingScreen(),
+            LastOnboardingScreen(goToLastPage: goToLastPage,),
+            UsernameProfileScreen(),
           ],
         ),
         onLastPageIndicator

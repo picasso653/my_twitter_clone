@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:my_twitter_clone/screens/auth_screen.dart';
 import 'package:my_twitter_clone/screens/home/home_screen.dart';
 import 'package:my_twitter_clone/screens/login/login_screen.dart';
+import 'package:my_twitter_clone/screens/navigation_screen.dart';
 import 'package:my_twitter_clone/screens/signup/onboarding/onboarding_screen.dart';
 import 'package:my_twitter_clone/screens/signup/signup_screen.dart';
 
