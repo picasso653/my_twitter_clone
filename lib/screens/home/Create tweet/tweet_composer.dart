@@ -25,6 +25,15 @@ class _TweetComposerState extends State<TweetComposer> {
 
   Future<void> _postTweet() async {
     String tweetContent = _tweetController.text;
+    String uid = user.uid;
+
+    DocumentSnapshot userSnapshot =
+        await FirebaseFirestore.instance.collection('Users').doc(uid).get();
+
+    String username = userSnapshot['username'] ?? 'DefaultUsername'; // Use a default if display name is not set
+    String postId = '$uid-${DateTime.now().millisecondsSinceEpoch}';
+    String profilePictureUrl = userSnapshot['profilepicture'];
+
     if (tweetContent.isNotEmpty && _image != null) {
     String uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
     String imagePath = 'images/$uniqueId.jpg';
@@ -32,11 +41,15 @@ class _TweetComposerState extends State<TweetComposer> {
 
     await ref.putFile(File(_image!.path));
     String imageUrl = await ref.getDownloadURL();
-
+    
     await FirebaseFirestore.instance.collection('tweets').add({
       'content': tweetContent,
       'image_url': imageUrl, // Add the image URL to Firestore
       'timestamp': FieldValue.serverTimestamp(),
+      'postId': postId,
+      'uid': uid,
+      'username': username,
+      'profilePictureUrl': profilePictureUrl
     });
 
     // Clear the tweet content and image after posting
@@ -50,11 +63,15 @@ class _TweetComposerState extends State<TweetComposer> {
       'content': tweetContent,
       'image_url': null,
       'timestamp': FieldValue.serverTimestamp(),
+      'postId': postId,
+      'uid': uid,
+      'username': username,
+      'profilePictureUrl': profilePictureUrl,
     });
     // Optionally, add the code to upload images here
     
   }
-  Navigator.pop(context);
+  Navigator.pushNamed(context, 'navigtionScreen');
   }
 
   void _pickImage() async {
@@ -98,6 +115,11 @@ class _TweetComposerState extends State<TweetComposer> {
       ),
       body: Column(
         children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            height: 400,
+            width: MediaQuery.of(context).size.width,
+          ),
           Padding(
             padding: EdgeInsets.all(16.0),
             child: TextField(

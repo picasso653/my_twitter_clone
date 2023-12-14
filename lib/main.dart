@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         'signupScreen': (context) => SignUpScreen(),
         'loginScreen': (context) => LoginScreen(),
         'homescreen': (context) => HomeScreen(),
-        
+        'navigationScreen': (context) => BottomNavBar()
       },
     );
   }
